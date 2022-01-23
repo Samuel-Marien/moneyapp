@@ -19,11 +19,13 @@ const IncomeDisplayer = () => {
               key={index}
               className={`${
                 index % 2 === 0 ? 'bg-white' : 'bg-light'
-              } p-2 d-flex justify-content-end`}
+              } p-2 d-flex justify-content-end text-danger`}
             >
               <div>
-                <div className="d-flex justify-content-end">{item.value}</div>
-                <div>{item.text}</div>
+                <div className="d-flex justify-content-end fw-bold">
+                  $ {item.value}
+                </div>
+                <div className="text-secondary fst-italic">{item.text}</div>
               </div>
             </div>
           )
@@ -33,11 +35,13 @@ const IncomeDisplayer = () => {
               key={index}
               className={`${
                 index % 2 === 0 ? 'bg-white' : 'bg-light'
-              } p-2 d-flex justify-content-center`}
+              } p-2 d-flex justify-content-center text-success`}
             >
               <div style={{ transform: 'translate(-55%)' }}>
-                <div className="d-flex justify-content-end">{item.value}</div>
-                <div>{item.text}</div>
+                <div className="d-flex justify-content-end fw-bold">
+                  $ {item.value}
+                </div>
+                <div className="text-secondary fst-italic">{item.text}</div>
               </div>
             </div>
           )
@@ -67,11 +71,12 @@ const Displayer = () => {
   }, [])
 
   return (
-    <Container className="mt-5 w-50 ">
+    <Container className="w-50 ">
       <div className="row">
         <div className="col border p-2">Incoming</div>
         <div className="col border p-2">Outgoing</div>
       </div>
+
       <IncomeDisplayer />
       <div className="row">
         <div className="col border p-2 text-success fw-bolder d-flex justify-content-end">
@@ -102,7 +107,8 @@ const Displayer = () => {
           }
               p-2 d-flex justify-content-end fw-bolder`}
         >
-          Result : <span className="ms-2">$</span>
+          <span className="text-black">Result :</span>{' '}
+          <span className="ms-2">$</span>
           {result
             ? result.reduce((acc, inc) => {
                 return Number(acc + inc)

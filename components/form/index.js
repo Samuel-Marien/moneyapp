@@ -9,6 +9,9 @@ import Button from 'react-bootstrap/Button'
 
 import MyStyledError from './MyStyledError'
 
+import { BsPiggyBank, BsPenFill, BsBank2 } from 'react-icons/bs'
+import { GiMoneyStack } from 'react-icons/gi'
+
 const transactionId = 0
 
 const MyForm = () => {
@@ -44,13 +47,13 @@ const MyForm = () => {
       }}
     >
       {(formik) => (
-        <Container className="mt-5 d-flex justify-content-center">
-          <form
-            className="d-flex flex-column w-50"
-            onSubmit={formik.handleSubmit}
-          >
+        <Container className="pt-5 d-flex justify-content-center border w-50">
+          <form className="d-flex flex-column" onSubmit={formik.handleSubmit}>
             <div className="d-flex justify-content-between">
-              <label htmlFor="newData">Last banking transactions</label>
+              <label htmlFor="newData" className="me-5">
+                <GiMoneyStack size={30} />
+                <span className="ms-2"> Last banking transactions</span>
+              </label>
               <input
                 id="newData"
                 name="newData"
@@ -62,21 +65,27 @@ const MyForm = () => {
               <MyStyledError>{formik.errors.newData}</MyStyledError>
             ) : null}
 
-            <label htmlFor="description" className="mt-4">
-              Description
+            <label htmlFor="description" className="mt-4 mb-2">
+              <BsPenFill />
+              <span className="ms-2">Description</span>
             </label>
             <textarea
               id="description"
               name="description"
               type="text"
+              style={{ height: '80px' }}
               {...formik.getFieldProps('description')}
             />
             {formik.touched.description && formik.errors.description ? (
               <MyStyledError>{formik.errors.description}</MyStyledError>
             ) : null}
             <div className="d-flex justify-content-end">
-              <Button variant="outline-info" type="submit" className="mt-5">
-                Add
+              <Button
+                variant="outline-success shadow"
+                type="submit"
+                className="my-3  px-4"
+              >
+                <BsPiggyBank size={30} />
               </Button>
             </div>
           </form>
