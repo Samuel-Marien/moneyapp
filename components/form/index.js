@@ -9,13 +9,26 @@ import Button from 'react-bootstrap/Button'
 
 import MyStyledError from './MyStyledError'
 
-import { BsPiggyBank, BsPenFill, BsBank2 } from 'react-icons/bs'
+import { BsPiggyBank, BsPenFill } from 'react-icons/bs'
 import { GiMoneyStack } from 'react-icons/gi'
 
 const transactionId = 0
 
 const MyForm = () => {
-  const { setState } = useContext(Context)
+  const { state, setState } = useContext(Context)
+
+  console.log(state)
+
+  function saveOnLocalStorage(data) {
+    let counter = localStorage.getItem('localCounter') || 0
+    try {
+      counter++
+      localStorage.setItem('localCounter', counter)
+      localStorage.setItem(`user_data_${counter}`, JSON.stringify(data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Formik
@@ -33,7 +46,7 @@ const MyForm = () => {
           .min(5, 'Must be 5 characters or more')
           .required('Required')
       })}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         transactionId++
         setState((previousState) => [
           ...previousState,
@@ -43,6 +56,12 @@ const MyForm = () => {
             text: values.description
           }
         ])
+        saveOnLocalStorage({
+          id: transactionId,
+          value: values.newData,
+          text: values.description
+        })
+        resetForm()
         setSubmitting(false)
       }}
     >
@@ -79,7 +98,10 @@ const MyForm = () => {
             {formik.touched.description && formik.errors.description ? (
               <MyStyledError>{formik.errors.description}</MyStyledError>
             ) : null}
-            <div className="d-flex justify-content-end">
+            <div
+              className="d-flex justify-content-end"
+              // onClick={() => saveOnLocalStorage(state)}
+            >
               <Button
                 variant="outline-success shadow"
                 type="submit"
