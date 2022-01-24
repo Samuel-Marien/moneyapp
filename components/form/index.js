@@ -12,23 +12,11 @@ import MyStyledError from './MyStyledError'
 import { BsPiggyBank, BsPenFill } from 'react-icons/bs'
 import { GiMoneyStack } from 'react-icons/gi'
 
-const transactionId = 0
-
 const MyForm = () => {
-  const { state, setState } = useContext(Context)
+  const { setState } = useContext(Context)
 
-  console.log(state)
-
-  function saveOnLocalStorage(data) {
-    let counter = localStorage.getItem('localCounter') || 0
-    try {
-      counter++
-      localStorage.setItem('localCounter', counter)
-      localStorage.setItem(`user_data_${counter}`, JSON.stringify(data))
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  let transactionId = Number(Date.now().toString().slice(5))
+  // console.log(state)
 
   return (
     <Formik
@@ -47,7 +35,6 @@ const MyForm = () => {
           .required('Required')
       })}
       onSubmit={(values, { setSubmitting, resetForm }) => {
-        transactionId++
         setState((previousState) => [
           ...previousState,
           {
@@ -56,11 +43,11 @@ const MyForm = () => {
             text: values.description
           }
         ])
-        saveOnLocalStorage({
-          id: transactionId,
-          value: values.newData,
-          text: values.description
-        })
+        // saveOnLocalStorage({
+        //   id: transactionId,
+        //   value: values.newData,
+        //   text: values.description
+        // })
         resetForm()
         setSubmitting(false)
       }}
@@ -118,3 +105,15 @@ const MyForm = () => {
 }
 
 export default MyForm
+
+// function saveOnLocalStorage(data) {
+//   let counter = localStorage.getItem('localCounter') || 0
+
+//   try {
+//     counter++
+//     localStorage.setItem('localCounter', counter)
+//     localStorage.setItem(`user_data_${counter}`, JSON.stringify(data))
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }

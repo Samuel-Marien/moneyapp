@@ -1,18 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useCallback } from 'react'
 
 import Context from '../context'
 
 import Container from 'react-bootstrap/Container'
 
-const IncomeDisplayer = () => {
-  const { state } = useContext(Context)
+const IncomeDisplayer = (props) => {
+  const { data } = props
 
   return (
     <div className="row border">
-      {state.map((item, index) => {
-        if (index === 0) {
-          return
-        }
+      {data.map((item, index) => {
         if (item.value < 0) {
           return (
             <div
@@ -39,7 +36,7 @@ const IncomeDisplayer = () => {
             >
               <div style={{ transform: 'translate(-55%)' }}>
                 <div className="d-flex justify-content-end fw-bold">
-                  $ {item.value}
+                  $ {Number(item.value)}
                 </div>
                 <div className="text-secondary fst-italic">{item.text}</div>
               </div>
@@ -53,11 +50,12 @@ const IncomeDisplayer = () => {
 
 const Displayer = () => {
   const { state } = useContext(Context)
-  const [positiveValue, setPositiveValue] = useState(['0'])
-  const [negativeValue, setNegativeValue] = useState(['0'])
-  const [result, setResult] = useState(['0'])
+  const [positiveValue, setPositiveValue] = useState([0])
+  const [negativeValue, setNegativeValue] = useState([0])
+  const [result, setResult] = useState([0])
 
   useEffect(() => {
+    // console.log(state)
     state
       ? state.map((item) => {
           setResult((prec) => [...prec, Number(item.value)])
@@ -77,7 +75,7 @@ const Displayer = () => {
         <div className="col border p-2">Outgoing</div>
       </div>
 
-      <IncomeDisplayer />
+      <IncomeDisplayer data={state} />
       <div className="row">
         <div className="col border p-2 text-success fw-bolder d-flex justify-content-end">
           <span className="text-black">TOTAL : </span>
@@ -121,3 +119,23 @@ const Displayer = () => {
 }
 
 export default Displayer
+
+// const localArray = []
+
+// function getLocalStorage(seter) {
+//   try {
+//     Object.keys(localStorage).forEach(function (key) {
+//       if (localStorage.getItem(key) === localStorage.getItem('localCounter')) {
+//         return
+//       }
+//       // console.log(JSON.parse(localStorage.getItem(key)).id)
+//       localArray.push(JSON.parse(localStorage.getItem(key)))
+//       // seter((prec) => [...prec, JSON.parse(localStorage.getItem(key))])
+//       seter(localArray)
+//     })
+//   } catch (error) {
+//     console.log(error)
+//   }
+
+//   return localArray
+// }
