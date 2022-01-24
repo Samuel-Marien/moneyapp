@@ -4,6 +4,8 @@ import Context from '../context'
 
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
 
 import { FaEraser } from 'react-icons/fa'
 
@@ -76,14 +78,23 @@ const Displayer = () => {
           <span className="ms-2">$</span>
           {negativeValue}
         </div>
-        <div className="p-2 d-flex justify-content-between align-items-center fw-bolder">
-          <Button
-            variant="outline-danger shadow"
-            className="px-4"
-            onClick={resetDatas}
+        <div className="mt-2 pe-2 p-0 m-0 d-flex justify-content-between align-items-center fw-bolder">
+          <OverlayTrigger
+            key="right"
+            placement="right"
+            overlay={
+              <Tooltip id={`tooltip-"right"`}>Delete all entries!!</Tooltip>
+            }
           >
-            <FaEraser size={30} />
-          </Button>
+            <Button
+              variant="outline-danger shadow"
+              className="px-4"
+              onClick={resetDatas}
+            >
+              <FaEraser size={30} />
+            </Button>
+          </OverlayTrigger>
+
           {positiveValue + negativeValue <= 0 ? (
             <div className="text-danger">
               <span className="text-black">Result :</span>{' '}

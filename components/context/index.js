@@ -1,7 +1,5 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react'
 
-// const initialState = [{ id: 0, value: 0, text: '' }]
-
 const save = (datas) => {
   localStorage.setItem('datas', JSON.stringify(datas))
 }
