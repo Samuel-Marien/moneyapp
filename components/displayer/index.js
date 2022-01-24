@@ -3,6 +3,9 @@ import React, { useContext } from 'react'
 import Context from '../context'
 
 import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
+
+import { FaEraser } from 'react-icons/fa'
 
 const IncomeDisplayer = (props) => {
   const { data } = props
@@ -52,9 +55,7 @@ const Displayer = () => {
   const { state } = useContext(Context)
   const { positiveValue } = useContext(Context)
   const { negativeValue } = useContext(Context)
-  const { result } = useContext(Context)
-
-  console.log(positiveValue)
+  const { resetDatas } = useContext(Context)
 
   return (
     <Container className="w-50 ">
@@ -75,15 +76,23 @@ const Displayer = () => {
           <span className="ms-2">$</span>
           {negativeValue}
         </div>
-        <div className={`p-2 d-flex justify-content-end fw-bolder`}>
-          <span className="text-black">Result :</span>{' '}
+        <div className="p-2 d-flex justify-content-between align-items-center fw-bolder">
+          <Button
+            variant="outline-danger shadow"
+            className="px-4"
+            onClick={resetDatas}
+          >
+            <FaEraser size={30} />
+          </Button>
           {positiveValue + negativeValue <= 0 ? (
             <div className="text-danger">
+              <span className="text-black">Result :</span>{' '}
               <span className="ms-2">$</span>
               {positiveValue + negativeValue}
             </div>
           ) : (
             <div className="text-success">
+              <span className="text-black">Result :</span>{' '}
               <span className="ms-2">$</span>
               {positiveValue + negativeValue}
             </div>

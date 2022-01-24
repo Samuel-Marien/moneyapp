@@ -1,13 +1,13 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect, useCallback } from 'react'
 
-const initialState = [{ id: 0, value: 0, text: '' }]
+// const initialState = [{ id: 0, value: 0, text: '' }]
 
 const save = (datas) => {
   localStorage.setItem('datas', JSON.stringify(datas))
 }
 
 export const Provider = (props) => {
-  const [state, setState] = useState(initialState)
+  const [state, setState] = useState([])
   const [positiveValue, setPositiveValue] = useState([0])
   const [negativeValue, setNegativeValue] = useState([0])
   const [loaded, setLoaded] = useState(false)
@@ -59,6 +59,8 @@ export const Provider = (props) => {
     setNegativeValue(totalIncome)
   }, [state])
 
+  const resetDatas = useCallback(() => localStorage.clear() + setState([]), [])
+
   return (
     <Context.Provider
       {...props}
@@ -66,7 +68,8 @@ export const Provider = (props) => {
         state,
         setState,
         positiveValue,
-        negativeValue
+        negativeValue,
+        resetDatas
       }}
     />
   )
