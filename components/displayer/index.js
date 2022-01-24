@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
+import React, { useContext } from 'react'
 
 import Context from '../context'
 
@@ -50,23 +50,11 @@ const IncomeDisplayer = (props) => {
 
 const Displayer = () => {
   const { state } = useContext(Context)
-  const [positiveValue, setPositiveValue] = useState([0])
-  const [negativeValue, setNegativeValue] = useState([0])
-  const [result, setResult] = useState([0])
+  const { positiveValue } = useContext(Context)
+  const { negativeValue } = useContext(Context)
+  const { result } = useContext(Context)
 
-  useEffect(() => {
-    // console.log(state)
-    state
-      ? state.map((item) => {
-          setResult((prec) => [...prec, Number(item.value)])
-          if (item.value > 0) {
-            setPositiveValue((prec) => [...prec, Number(item.value)])
-          } else {
-            setNegativeValue((prec) => [...prec, Number(item.value)])
-          }
-        })
-      : null
-  }, [])
+  console.log(positiveValue)
 
   return (
     <Container className="w-50 ">
@@ -80,38 +68,26 @@ const Displayer = () => {
         <div className="col border p-2 text-success fw-bolder d-flex justify-content-end">
           <span className="text-black">TOTAL : </span>
           <span className="ms-2">$+</span>
-          {positiveValue
-            ? positiveValue.reduce((acc, inc) => {
-                return Number(acc + inc)
-              })
-            : null}
+          {positiveValue}
         </div>
         <div className="col border p-2 text-danger fw-bolder d-flex justify-content-end">
           <span className="text-black">TOTAL :</span>
           <span className="ms-2">$</span>
-          {negativeValue
-            ? negativeValue.reduce((acc, inc) => {
-                return Number(acc + inc)
-              })
-            : null}
+          {negativeValue}
         </div>
-        <div
-          className={`${
-            result.reduce((acc, inc) => {
-              return Number(acc + inc)
-            }) >= 0
-              ? `text-success `
-              : `text-danger`
-          }
-              p-2 d-flex justify-content-end fw-bolder`}
-        >
+        <div className={`p-2 d-flex justify-content-end fw-bolder`}>
           <span className="text-black">Result :</span>{' '}
-          <span className="ms-2">$</span>
-          {result
-            ? result.reduce((acc, inc) => {
-                return Number(acc + inc)
-              })
-            : null}
+          {positiveValue + negativeValue <= 0 ? (
+            <div className="text-danger">
+              <span className="ms-2">$</span>
+              {positiveValue + negativeValue}
+            </div>
+          ) : (
+            <div className="text-success">
+              <span className="ms-2">$</span>
+              {positiveValue + negativeValue}
+            </div>
+          )}
         </div>
       </div>
     </Container>
@@ -119,23 +95,3 @@ const Displayer = () => {
 }
 
 export default Displayer
-
-// const localArray = []
-
-// function getLocalStorage(seter) {
-//   try {
-//     Object.keys(localStorage).forEach(function (key) {
-//       if (localStorage.getItem(key) === localStorage.getItem('localCounter')) {
-//         return
-//       }
-//       // console.log(JSON.parse(localStorage.getItem(key)).id)
-//       localArray.push(JSON.parse(localStorage.getItem(key)))
-//       // seter((prec) => [...prec, JSON.parse(localStorage.getItem(key))])
-//       seter(localArray)
-//     })
-//   } catch (error) {
-//     console.log(error)
-//   }
-
-//   return localArray
-// }

@@ -16,7 +16,6 @@ const MyForm = () => {
   const { setState } = useContext(Context)
 
   let transactionId = Number(Date.now().toString().slice(5))
-  // console.log(state)
 
   return (
     <Formik
@@ -43,11 +42,6 @@ const MyForm = () => {
             text: values.description
           }
         ])
-        // saveOnLocalStorage({
-        //   id: transactionId,
-        //   value: values.newData,
-        //   text: values.description
-        // })
         resetForm()
         setSubmitting(false)
       }}
@@ -85,10 +79,7 @@ const MyForm = () => {
             {formik.touched.description && formik.errors.description ? (
               <MyStyledError>{formik.errors.description}</MyStyledError>
             ) : null}
-            <div
-              className="d-flex justify-content-end"
-              // onClick={() => saveOnLocalStorage(state)}
-            >
+            <div className="d-flex justify-content-end">
               <Button
                 variant="outline-success shadow"
                 type="submit"
@@ -105,15 +96,3 @@ const MyForm = () => {
 }
 
 export default MyForm
-
-// function saveOnLocalStorage(data) {
-//   let counter = localStorage.getItem('localCounter') || 0
-
-//   try {
-//     counter++
-//     localStorage.setItem('localCounter', counter)
-//     localStorage.setItem(`user_data_${counter}`, JSON.stringify(data))
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }

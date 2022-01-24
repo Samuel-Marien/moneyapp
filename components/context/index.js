@@ -8,16 +8,17 @@ const save = (datas) => {
 
 export const Provider = (props) => {
   const [state, setState] = useState(initialState)
+  const [positiveValue, setPositiveValue] = useState([0])
+  const [negativeValue, setNegativeValue] = useState([0])
   const [loaded, setLoaded] = useState(false)
 
-  //save Item in localStorage
+  // Save Item in localStorage
   useEffect(() => {
     if (!loaded) {
       return
     }
     save(state)
   }, [loaded, state])
-  console.log(state)
 
   // Get item on local Storage
   useEffect(() => {
@@ -34,12 +35,38 @@ export const Provider = (props) => {
     setLoaded(true)
   }, [])
 
+  // Calculate income
+  useEffect(() => {
+    let totalIncome = state.reduce((total, current) => {
+      if (current.value > 0) {
+        return Number(total) + Number(current.value)
+      }
+      return Number(total) + 0
+    }, 0)
+
+    setPositiveValue(totalIncome)
+  }, [state])
+
+  // Calculate outgoing
+  useEffect(() => {
+    let totalIncome = state.reduce((total, current) => {
+      if (current.value < 0) {
+        return Number(total) + Number(current.value)
+      }
+      return Number(total) + 0
+    }, 0)
+
+    setNegativeValue(totalIncome)
+  }, [state])
+
   return (
     <Context.Provider
       {...props}
       value={{
         state,
-        setState
+        setState,
+        positiveValue,
+        negativeValue
       }}
     />
   )
