@@ -47,12 +47,12 @@ const MyForm = () => {
       }}
     >
       {(formik) => (
-        <Container className="pt-5 d-flex justify-content-center border w-50">
+        <Container className="col-12 col-md-6 pt-5 d-flex justify-content-center border">
           <form className="d-flex flex-column" onSubmit={formik.handleSubmit}>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex flex-column flex-sm-row justify-content-between">
               <label htmlFor="newData" className="me-5">
                 <GiMoneyStack size={30} />
-                <span className="ms-2"> Last banking transactions</span>
+                <span className="ms-2"> Last transactions</span>
               </label>
               <input
                 id="newData"

@@ -10,7 +10,7 @@ import { FaPiggyBank, FaHome } from 'react-icons/fa'
 
 const MyNavbar = () => {
   return (
-    <Container className="mt-5 w-50 p-0">
+    <Container className="col-12 col-sm-6 mt-0 mt-sm-5 p-0">
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>
@@ -25,13 +25,13 @@ const MyNavbar = () => {
             <Link href="/">
               <a className="text-secondary text-decoration-none me-4 d-flex flex-column align-items-center">
                 <FaHome size={25} />
-                <span className="text-sm">Home</span>
+                <span className="text-sm d-none d-sm-block">Home</span>
               </a>
             </Link>
             <Link href="/newData">
               <a className="text-secondary text-decoration-none d-flex flex-column align-items-center">
                 <FaPiggyBank size={25} />
-                <span>Add</span>
+                <span className="d-none d-sm-block">Add</span>
               </a>
             </Link>
           </Nav>

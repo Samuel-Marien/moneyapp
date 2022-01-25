@@ -60,12 +60,11 @@ const Displayer = () => {
   const { resetDatas } = useContext(Context)
 
   return (
-    <Container className="w-50 ">
+    <Container className="col-12 col-sm-6">
       <div className="row">
         <div className="col border p-2">Incoming</div>
         <div className="col border p-2">Outgoing</div>
       </div>
-
       <IncomeDisplayer data={state} />
       <div className="row">
         <div className="col border p-2 text-success fw-bolder d-flex justify-content-end">
@@ -94,7 +93,6 @@ const Displayer = () => {
               <FaEraser size={30} />
             </Button>
           </OverlayTrigger>
-
           {positiveValue + negativeValue <= 0 ? (
             <div className="text-danger">
               <span className="text-black">Result :</span>{' '}
