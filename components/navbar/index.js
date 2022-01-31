@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container'
 
 import { FcMoneyTransfer } from 'react-icons/fc'
 import { FaPiggyBank, FaHome } from 'react-icons/fa'
+import { RiAccountCircleFill, RiAccountPinBoxLine } from 'react-icons/ri'
 
 const MyNavbar = () => {
   return (
@@ -32,6 +33,20 @@ const MyNavbar = () => {
               <a className="text-secondary text-decoration-none d-flex flex-column align-items-center">
                 <FaPiggyBank size={25} />
                 <span className="d-none d-sm-block">Add</span>
+              </a>
+            </Link>
+          </Nav>
+          <Nav className="ms-auto">
+            <Link href="/signin">
+              <a className="text-secondary text-decoration-none me-4 d-flex flex-column align-items-center">
+                <RiAccountCircleFill size={25} />
+                <span className="text-sm d-none d-sm-block">Signin</span>
+              </a>
+            </Link>
+            <Link href="/signup">
+              <a className="text-secondary text-decoration-none d-flex flex-column align-items-center">
+                <RiAccountPinBoxLine size={25} />
+                <span className="d-none d-sm-block">Connect</span>
               </a>
             </Link>
           </Nav>
