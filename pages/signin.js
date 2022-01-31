@@ -1,5 +1,7 @@
 import Head from 'next/head'
+
 import MyNavbar from '../components/navbar'
+import SignForm from '../components/signForm'
 
 const Signin = () => {
   return (
@@ -10,6 +12,7 @@ const Signin = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MyNavbar />
+      <SignForm />
     </div>
   )
 }
